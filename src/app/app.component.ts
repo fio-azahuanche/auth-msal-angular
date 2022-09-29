@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
 
@@ -7,10 +7,20 @@ import { AuthenticationResult } from '@azure/msal-browser';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   title = 'microsoft-login';
 
   constructor(private msalService: MsalService) {
+  }
+
+  ngOnInit(): void {
+    this.msalService.instance.handleRedirectPromise().then(
+      res => {
+        if(res != null && res.account != null) {
+          this.msalService.instance.setActiveAccount(res.account)
+        }
+      }
+    )
   }
 
   isLoggedIn() : boolean {
@@ -18,9 +28,7 @@ export class AppComponent {
   }
 
   login() {
-    this.msalService.loginPopup().subscribe( (response: AuthenticationResult) => {
-      this.msalService.instance.setActiveAccount(response.account)
-    });
+    this.msalService.loginRedirect();
   }
 
   logout() {
