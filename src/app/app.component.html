@@ -27,10 +27,23 @@
 
 <div *ngIf="isLoggedIn()">
   <h3>You are logged in.</h3>
+  <p>Welcome {{getName()}}!</p>
 </div>
 
 <div *ngIf="!isLoggedIn()">
   <h3>You are NOT logged in.</h3>
 </div>
 
+<table *ngIf="isLoggedIn()">
+  <tr>
+    <td>
+      <button (click)="callProfile()">
+        GET PROFILE
+      </button>
+    </td>
+  </tr>
+  <tr>
+    API Response: {{apiResponse}}
+  </tr>
+</table>
 <router-outlet></router-outlet>

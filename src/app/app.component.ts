@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { MsalService } from '@azure/msal-angular';
 import { AuthenticationResult } from '@azure/msal-browser';
@@ -9,8 +10,9 @@ import { AuthenticationResult } from '@azure/msal-browser';
 })
 export class AppComponent implements OnInit{
   title = 'microsoft-login';
+  apiResponse!: string;
 
-  constructor(private msalService: MsalService) {
+  constructor(private msalService: MsalService, private httpClient: HttpClient) {
   }
 
   ngOnInit(): void {
@@ -33,5 +35,18 @@ export class AppComponent implements OnInit{
 
   logout() {
     this.msalService.logout();
+  }
+
+  getName(): string | undefined{
+    if (this.msalService.instance.getActiveAccount() == null) {
+      return 'unknown'
+    }
+    return this.msalService.instance.getActiveAccount()?.name
+  }
+
+  callProfile (){
+    this.httpClient.get("https://graph.microsoft-ppe.com/v1.0/me").subscribe( resp => {
+      this.apiResponse = JSON.stringify(resp);
+    })
   }
 }
