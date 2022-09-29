@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { RestrictedPageComponent } from './restricted-page/restricted-page.component';
+import { MsalGuard } from './msal.guard';
 
 const routes: Routes = [
   {
@@ -10,7 +11,8 @@ const routes: Routes = [
   },
   {
     path: 'restricted-page',
-    component: RestrictedPageComponent
+    component: RestrictedPageComponent,
+    canActivate: [MsalGuard]
   },
   {
     path: '**',
