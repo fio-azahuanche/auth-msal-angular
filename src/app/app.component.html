@@ -6,8 +6,22 @@
     <td>
       <a routerLink="restricted-page" *ngIf="isLoggedIn()">[RESTRICTED-PAGE]</a>
     </td>
-    <td><button (click)="login()" *ngIf="!isLoggedIn()">SIGN IN</button></td>
-    <td><button (click)="logout()" *ngIf="isLoggedIn()">SIGN OUT</button></td>
+    <td>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="login()"
+        *ngIf="!isLoggedIn()"
+        >SIGN IN</button>
+    </td>
+    <td>
+      <button
+        mat-raised-button
+        color="warn"
+        (click)="logout()"
+        *ngIf="isLoggedIn()"
+        >SIGN OUT</button>
+    </td>
   </tr>
 </table>
 

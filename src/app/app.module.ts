@@ -9,6 +9,8 @@ import { AppComponent } from './app.component';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { RestrictedPageComponent } from './restricted-page/restricted-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule} from '@angular/material/button';
+
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -31,6 +33,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     HttpClientModule,
     MsalModule,
     BrowserAnimationsModule,
+    MatButtonModule
   ],
   providers: [
     {
