@@ -8,6 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PublicPageComponent } from './public-page/public-page.component';
 import { RestrictedPageComponent } from './restricted-page/restricted-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 export function MSALInstanceFactory(): IPublicClientApplication {
   return new PublicClientApplication({
@@ -29,6 +30,7 @@ export function MSALInstanceFactory(): IPublicClientApplication {
     AppRoutingModule,
     HttpClientModule,
     MsalModule,
+    BrowserAnimationsModule,
   ],
   providers: [
     {
